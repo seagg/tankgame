@@ -2,7 +2,7 @@
 
 TankGame is an open source game based on LÖVE which is a framework for making 2D games in the Lua programming language. 
 
-## Supported Platforms
+## Supported Platforms    
 * Linux 
 * Android (not test...)
 * Windows (not test...)
@@ -11,6 +11,7 @@ TankGame is an open source game based on LÖVE which is a framework for making 2
 ## Quick start
 
 There are four quick start options available:
+
 * Download the current stable LÖVE engine(0.8.0) from [LÖVE website](https://love2d.org/) and install it
 * Clone the tank project to your local computer
 * Run the game using the following command outside the tankgame directory:
