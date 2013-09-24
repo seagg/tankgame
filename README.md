@@ -15,9 +15,10 @@ There are four quick start options available:
 * Download the current stable LÖVE engine(0.8.0) from [LÖVE website](https://love2d.org/) and install it
 * Clone the tank project to your local computer
 * Run the game using the following command outside the tankgame directory:    
-```lua   
+```   
 love tankgame
-```    
+```
+
 ## How to play
 ...
 
