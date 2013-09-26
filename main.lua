@@ -18,7 +18,7 @@ end
 
 function love.draw()
 	love.graphics.setColor(bgcolor.r, bgcolor.g, bgcolor.b)
-	--love.graphics.rectangle("fill",0,0,love.graphics.getWidth(),love.graphics.getHeight())
+	love.graphics.rectangle("fill",0,0,love.graphics.getWidth(),love.graphics.getHeight())
     if state == "menu" then
     	menu.draw()
     end
