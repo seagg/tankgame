@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # TankGame
 
 TankGame is an open source game based on LÖVE which is a framework for making 2D games in the Lua programming language. 
@@ -29,3 +30,7 @@ love tankgame
 * Game 
 * More maps
 * ...
+=======
+tankgame
+========
+>>>>>>> 9ecb7fe8498d33c891ac34af08498204f88c986a
