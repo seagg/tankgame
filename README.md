@@ -10,9 +10,9 @@ TankGame is an open source game based on LÖVE which is a framework for making 2
 
 ## Quick start
 
-There are four quick start options available:
+There are some quick start options available:
 
-* Download the current stable LÖVE engine(0.8.0) from [LÖVE website](https://love2d.org/) and install it
+* Download the current stable LÖVE engine(0.8.0) from [LÖVE website](https://love2d.org/) and install it. If your OS is Ubuntu, you could just use the file in the Installers to install the runtime environment.
 * Clone the tank project to your local computer
 * Run the game using the following command outside the tankgame directory:    
 ```   
