@@ -18,7 +18,7 @@ end
 
 function love.draw()
 	love.graphics.setColor(bgcolor.r, bgcolor.g, bgcolor.b)
-	love.graphics.rectangle("fill",0,0,love.graphics.getWidth(),love.graphics.getHeight())
+	--love.graphics.rectangle("fill",0,0,love.graphics.getWidth(),love.graphics.getHeight())
     if state == "menu" then
     	menu.draw()
     end
@@ -42,5 +42,11 @@ function love.keypressed(key)
 		menu.keypressed(key)
     elseif state == "game" then
         game.keypressed(key)
+    end
+end
+
+function love.keyreleased(key)
+	if state == "game" then
+        game.keyreleased(key)
     end
 end

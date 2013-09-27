@@ -11,6 +11,7 @@ function game.load()
     game.player.x = love.graphics.getWidth() / 2 - game.player.size / 2
     game.player.y = love.graphics.getHeight() / 2 - game.player.size / 2
     game.player.direction = "left"
+    game.player.moving = false
     game.player.bullets = {}
 end
 
@@ -24,33 +25,10 @@ function game.draw()
 end
 
 function game.update(dt)
-	if love.keyboard.isDown("right") then
-		game.player.direction = "right"
-		game.player.x = game.player.x + 50*dt*scale
-	end
-	if love.keyboard.isDown("left") then
-		game.player.direction = "left"
-		game.player.x = game.player.x - 50*dt*scale
-	end
-	if love.keyboard.isDown("up") then
-		game.player.direction = "up"
-		game.player.y = game.player.y - 50*dt*scale
-	end
-	if love.keyboard.isDown("down") then
-		game.player.direction = "down"
-		game.player.y = game.player.y + 50*dt*scale
-	end
-
+    game.move(game.player, 50, dt)
 	for bi,bv in ipairs(game.player.bullets) do
-		if bv.direction == "up" then
-            bv.y = bv.y - 100*dt*scale
-        elseif bv.direction == "down" then
-        	bv.y = bv.y + 100*dt*scale
-        elseif bv.direction == "right" then
-        	bv.x = bv.x + 100*dt*scale
-        elseif bv.direction == "left" then
-        	bv.x = bv.x - 100*dt*scale
-        end
+        bv.moving = true
+        game.move(bv, 100, dt)
         if bv.x<0 or bv.x>love.graphics.getWidth() or bv.y<0 or bv.y>love.graphics.getHeight() then
         	table.remove(game.player.bullets, bi)
         end
@@ -64,5 +42,41 @@ function game.keypressed(key)
 		bullet.y = game.player.y
 		bullet.direction = game.player.direction
 		table.insert(game.player.bullets, bullet)
+	end
+		
+	if key == "up" then
+		game.player.direction = "up"
+	elseif key == "down" then
+		game.player.direction = "down"
+	elseif key == "left" then
+		game.player.direction = "left"
+	elseif key == "right" then
+		game.player.direction = "right"
+	end
+
+	if key == "up" or key == "down" or key == "left" or key == "right" then
+		game.player.moving = true
+	end
+
+end
+
+function game.keyreleased(key)
+	if key == "escape" then
+        love.event.push("quit")   -- actually causes the app to quit
+    end
+    game.player.moving = false
+end
+
+function game.move(obj, speed, dt)
+	if obj.moving == true then
+		if obj.direction == "up" then
+			obj.y = obj.y - speed*dt*scale
+		elseif obj.direction == "down" then
+			obj.y = obj.y + speed*dt*scale
+		elseif obj.direction == "right" then
+			obj.x = obj.x + speed*dt*scale
+		elseif obj.direction == "left" then
+			obj.x = obj.x - speed*dt*scale
+		end
 	end
 end
