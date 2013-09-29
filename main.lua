@@ -1,7 +1,8 @@
 require('menu')
 require('game')
+require('map')
 function love.load()
-	img_fn = {"tank_title", "player"}
+	img_fn = {"tank_title", "player", "enemy", "brick", "steel", "noway"}
 	imgs = {}
 	for _,v in ipairs(img_fn) do
 		imgs[v] = love.graphics.newImage("assets/"..v..".gif")
