@@ -67,6 +67,10 @@ function game.update(dt)
 	--player part
     game.move(game.player, 50, dt)
     game.outline(game.player)
+	if game.player.out == true then
+    	game.moveback(game.player, 50, dt)
+    	game.player.out = false
+    end
 
 	for bi,bv in ipairs(game.player.bullets) do
         bv.moving = true
@@ -77,9 +81,13 @@ function game.update(dt)
             	table.remove(game.player.bullets, bi)
             end
         end
-        if bv.x<0 or bv.x>love.graphics.getWidth() or bv.y<0 or bv.y>love.graphics.getHeight() then
+        game.outline(bv)
+        if bv.out == true then
         	table.remove(game.player.bullets, bi)
         end
+       --[[ if bv.x<0 or bv.x>love.graphics.getWidth() or bv.y<0 or bv.y>love.graphics.getHeight() then
+        	table.remove(game.player.bullets, bi)
+        end]]
     end
 
     --enemy part
@@ -111,17 +119,30 @@ function game.update(dt)
         	local _bullet = {}
 			_bullet.x = ev.x
 			_bullet.y = ev.y
+			_bullet.size = 2
+			_bullet.out = false
 			_bullet.direction = ev.direction
 			table.insert(ev.bullets, _bullet)
 		end
 
-        --bullets move
+        --enemy bullet move
 		for _, bv in ipairs(ev.bullets) do
             bv.moving = true
             game.move(bv, 100, dt)
+            --game over
+            if game.dist(bv.x, bv.y, game.player.x, game.player.y) < 1 + game.player.size/2 then
+                state = "menu"
+    			menu.load()
+    		end
+            game.outline(bv)
+    		if bv.out == true then
+    			table.remove(ev.bullets, bi)
+    		end
+--[[
 	        if bv.x<0 or bv.x>love.graphics.getWidth() or bv.y<0 or bv.y>love.graphics.getHeight() then
 	        	table.remove(ev.bullets, bi)
 	        end
+]]
 		end
     end
 end
@@ -132,6 +153,8 @@ function game.keypressed(key)
 		local bullet = {}
 		bullet.x = game.player.x
 		bullet.y = game.player.y
+		bullet.out = false
+		bullet.size = 2
 		bullet.direction = game.player.direction
 		table.insert(game.player.bullets, bullet)
 	end
@@ -193,8 +216,6 @@ end
 --用于判断物体是否跑出画面外
 function game.outline(obj)
 	obj.out = true
-	local step1 = true
-	local step2 = true
 	if obj.x < obj.size/2 then
     	obj.x = obj.size/2
     elseif obj.y<obj.size/2 then
