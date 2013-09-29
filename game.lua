@@ -71,6 +71,12 @@ function game.update(dt)
     	game.moveback(game.player, 50, dt)
     	game.player.out = false
     end
+    for _, v in ipairs(game.enemies) do
+        if game.isCross(game.player, v) then
+        	game.moveback(game.player, 50, dt)
+        end
+    end
+
 
 	for bi,bv in ipairs(game.player.bullets) do
         bv.moving = true
@@ -110,6 +116,9 @@ function game.update(dt)
     		game.moveback(ev, 20, dt)
     		ev.direction = game.direction[math.floor(math.random(1.01, 4.99))]
     		ev.out = false
+    	elseif game.isCross(ev, game.player) then
+    		game.moveback(ev, 20, dt)
+    		ev.direction = game.direction[math.floor(math.random(1.01, 4.99))]
     	end
         
         --enemy's new bullet
@@ -138,11 +147,6 @@ function game.update(dt)
     		if bv.out == true then
     			table.remove(ev.bullets, bi)
     		end
---[[
-	        if bv.x<0 or bv.x>love.graphics.getWidth() or bv.y<0 or bv.y>love.graphics.getHeight() then
-	        	table.remove(ev.bullets, bi)
-	        end
-]]
 		end
     end
 end
