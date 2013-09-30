@@ -1,9 +1,9 @@
 game = {}
 direction = {
-  up = 270;
-  down = 90;
-  right = 0;
-  left = 180;
+  up = 90;
+  down = 270;
+  right = 180;
+  left = 0;
 }
 
 function game.load()
@@ -28,9 +28,9 @@ function game.load()
     	for j = 1, map_h do
             if map[i][j] == 1 then
                 local _obs = {}
-                _obs.y = (i-1)*22+11
-                _obs.x = (j-1)*22+11
-                _obs.size = imgs["noway"]:getWidth()
+                _obs.y = (i-1)*imgs["brick"]:getWidth()+imgs["brick"]:getWidth()/2
+                _obs.x = (j-1)*imgs["brick"]:getWidth()+imgs["brick"]:getWidth()/2
+                _obs.size = imgs["brick"]:getWidth()
                 table.insert(game.map, _obs)
             end
         end
@@ -41,7 +41,7 @@ function game.draw()
 	--draw player
 	love.graphics.draw(imgs["player"], game.player.x, game.player.y, math.rad(direction[game.player.direction]),
 	    1, 1 , game.player.size/2,game.player.size/2)	
-	love.graphics.setColor(80, 80, 80)
+	love.graphics.setColor(bulletcolor.r, bulletcolor.g, bulletcolor.b)
 
 	--draw player's bullet
     for bi,bv in ipairs(game.player.bullets) do
@@ -57,10 +57,11 @@ function game.draw()
         end	
     end
     
-    love.graphics.setColor(255, 255, 255)
+    
     for mi, mv in ipairs(game.map) do
-    	love.graphics.draw(imgs["noway"], mv.x, mv.y, 0, 1, 1, 11, 11)
+    	love.graphics.draw(imgs["brick"], mv.x, mv.y, 0, 1, 1, imgs["brick"]:getWidth()/2, imgs["brick"]:getHeight()/2)
     end
+    love.graphics.setColor(255, 255, 255)
 end
 
 function game.update(dt)
@@ -82,7 +83,7 @@ function game.update(dt)
         bv.moving = true
         game.move(bv, 100, dt)
         for ei, ev in ipairs(game.enemies) do
-            if game.dist(bv.x, bv.y, ev.x, ev.y) < (1 + game.enemy_size/2) then
+            if game.dist(bv.x, bv.y, ev.x, ev.y) < (2 + game.enemy_size/2) then
             	table.remove(game.enemies, ei)
             	table.remove(game.player.bullets, bi)
             end
@@ -91,9 +92,6 @@ function game.update(dt)
         if bv.out == true then
         	table.remove(game.player.bullets, bi)
         end
-       --[[ if bv.x<0 or bv.x>love.graphics.getWidth() or bv.y<0 or bv.y>love.graphics.getHeight() then
-        	table.remove(game.player.bullets, bi)
-        end]]
     end
 
     --enemy part

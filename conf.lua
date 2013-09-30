@@ -1,6 +1,6 @@
 scale = 4
 function love.conf(t)
-	t.screen.width = 800
-	t.screen.height = 500
+	t.screen.width = 1000	
+	t.screen.height = 1000
 	t.title = "Tank"
 end

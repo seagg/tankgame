@@ -2,7 +2,7 @@ require('menu')
 require('game')
 require('map')
 function love.load()
-	img_fn = {"tank_title", "player", "enemy", "brick", "steel", "noway"}
+	img_fn = {"tank_title", "player", "enemy", "brick"}
 	imgs = {}
 	for _,v in ipairs(img_fn) do
 		imgs[v] = love.graphics.newImage("assets/"..v..".gif")
@@ -11,7 +11,8 @@ function love.load()
 	font = love.graphics.newFont("assets/font.ttf",5*scale)
 	love.graphics.setFont(font)
 	-- define colors (global assets)
-    bgcolor = {r=190,g=100,b=0}
+	bulletcolor = {r=80, g=80, b=80}
+    bgcolor = {r=255,g=255,b=255}
     fontcolor = {r=100,g=100,b=255}
     state = "menu"
     menu.load()
