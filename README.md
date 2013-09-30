@@ -5,7 +5,7 @@ TankGame is an open source game based on LÖVE which is a framework for making 2
 ## Supported Platforms    
 * Linux 
 * Android (not test...)
-* Windows (not test...)
+* Windows (has a small bug..)
 * Mac OS X (not test...)
 
 ## Quick start

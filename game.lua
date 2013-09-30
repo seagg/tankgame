@@ -56,8 +56,7 @@ function game.draw()
             love.graphics.circle("fill", bv.x, bv.y, 2)
         end	
     end
-    
-    
+
     for mi, mv in ipairs(game.map) do
     	love.graphics.draw(imgs["brick"], mv.x, mv.y, 0, 1, 1, imgs["brick"]:getWidth()/2, imgs["brick"]:getHeight()/2)
     end
